@@ -1,0 +1,3 @@
+Added Component: Designator=u*(MSSOP-10)
+Add component. Clean all parameters for all variants
+Added Member To Class: ClassName=toplevel Member=Component u* TPS54260
