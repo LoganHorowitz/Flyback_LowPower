@@ -1,2 +1,6 @@
 # Flyback_LowPower
-A switched-mode DC-DC converter for my project team, Resistance Racing: Cornell Electric Vehicles.  Converts 12S LiPo battery pack down to 5V, up to 500mA current draw with resistive load.
+A switched-mode DC-DC converter.<br>
+Input: 12S LiPo battery pack (~45-50V)<br> 
+Output: 5V, up to 500mA with resistive load.<br><br>
+
+Resistance Racing: Cornell Electric Vehicles
