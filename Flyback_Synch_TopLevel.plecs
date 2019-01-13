@@ -641,7 +641,7 @@ Plecs {
         Direction     right
       }
       Schematic {
-        Location      [0, 23; 1600, 811]
+        Location      [0, 27; 1600, 815]
         ZoomFactor    1.77778
         SliderPosition [0, 0]
         ShowBrowser   off
@@ -1116,6 +1116,37 @@ Plecs {
             Show          off
           }
         }
+        Component {
+          Type          Capacitor
+          Name          "C5"
+          Show          on
+          Position      [320, 220]
+          Direction     down
+          Flipped       on
+          Parameter {
+            Variable      "C"
+            Value         "10e-6"
+            Show          off
+          }
+          Parameter {
+            Variable      "v_init"
+            Value         "0"
+            Show          off
+          }
+        }
+        Component {
+          Type          Resistor
+          Name          "R9"
+          Show          on
+          Position      [320, 175]
+          Direction     up
+          Flipped       off
+          Parameter {
+            Variable      "R"
+            Value         "1.9"
+            Show          off
+          }
+        }
         Connection {
           Type          Wire
           SrcComponent  "Tr2"
@@ -1128,13 +1159,20 @@ Plecs {
           Branch {
             Points        [360, 120]
             Branch {
-              Points        [185, 120]
+              Points        [320, 120]
               Branch {
-                DstComponent  "Am1"
-                DstTerminal   2
+                Points        [185, 120]
+                Branch {
+                  DstComponent  "Am1"
+                  DstTerminal   2
+                }
+                Branch {
+                  DstComponent  "R8"
+                  DstTerminal   1
+                }
               }
               Branch {
-                DstComponent  "R8"
+                DstComponent  "R9"
                 DstTerminal   1
               }
             }
@@ -1317,20 +1355,6 @@ Plecs {
           DstTerminal   4
         }
         Connection {
-          Type          Wire
-          SrcComponent  "Q1"
-          SrcTerminal   2
-          Points        [360, 255]
-          Branch {
-            DstComponent  "L1"
-            DstTerminal   2
-          }
-          Branch {
-            DstComponent  "C4"
-            DstTerminal   2
-          }
-        }
-        Connection {
           Type          Signal
           SrcComponent  "Am1"
           SrcTerminal   3
@@ -1372,6 +1396,34 @@ Plecs {
           SrcTerminal   2
           DstComponent  "C3"
           DstTerminal   1
+        }
+        Connection {
+          Type          Wire
+          SrcComponent  "R9"
+          SrcTerminal   2
+          DstComponent  "C5"
+          DstTerminal   1
+        }
+        Connection {
+          Type          Wire
+          SrcComponent  "L1"
+          SrcTerminal   2
+          Points        [320, 255]
+          Branch {
+            Points        [360, 255]
+            Branch {
+              DstComponent  "Q1"
+              DstTerminal   2
+            }
+            Branch {
+              DstComponent  "C4"
+              DstTerminal   2
+            }
+          }
+          Branch {
+            DstComponent  "C5"
+            DstTerminal   2
+          }
         }
       }
     }
@@ -1579,9 +1631,9 @@ Plecs {
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAA"
-"wAAAGQAAAACAAAAZAAAAAUAAABkAAAABAAAAGQAAAAHAAAAZAAAAAYAAABkAAAACQAAAGQAAAAIAA"
-"AAZAAAAAEAAABkAAAAuQAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAACSAAA"
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAB"
+"AAAAGQAAAAHAAAAZAAAAAYAAABkAAAAAQAAAGQAAAADAAAAZAAAAAIAAABkAAAACQAAAGQAAAAIAA"
+"AAZAAAAAUAAABkAAAAfQAAAAsBAAABAAAAAAAAAAAAAAAAZP////8AAACBAAAAAAAAAAsAAABWAAA"
 "AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
 "AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
 "AAnAAAAAQAAAAAAAAPoAAAAACc="
@@ -1593,7 +1645,7 @@ Plecs {
       TimeRange     "0.0"
       ScrollingMode "1"
       SingleTimeAxis "1"
-      Open          "0"
+      Open          "1"
       Ts            "-1"
       SampleLimit   "0"
       XAxisLabel    ""
@@ -1764,14 +1816,6 @@ Plecs {
     }
     Connection {
       Type          Signal
-      SrcComponent  "Controls"
-      SrcTerminal   4
-      Points        [230, 245; 230, 280; 395, 280]
-      DstComponent  "Mux"
-      DstTerminal   3
-    }
-    Connection {
-      Type          Signal
       SrcComponent  "Trans"
       SrcTerminal   1
       DstComponent  "Flyback v1"
@@ -1831,17 +1875,17 @@ Plecs {
     Connection {
       Type          Signal
       SrcComponent  "Controls"
-      SrcTerminal   3
-      Points        [220, 235; 220, 290; 405, 290]
-      DstComponent  "Mux"
-      DstTerminal   4
-    }
-    Connection {
-      Type          Signal
-      SrcComponent  "Controls"
       SrcTerminal   2
       Points        [215, 225]
       DstComponent  "Manual Switch"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Flyback v1"
+      SrcTerminal   5
+      Points        [395, 130]
+      DstComponent  "Mux"
       DstTerminal   3
     }
   }
